@@ -16,33 +16,10 @@ namespace PrimaryNumbers
 
         public IEnumerable<BigInteger> GetPrimaryNumbersInRange(BigInteger start, BigInteger end)
         {
-            string path= Directory.GetCurrentDirectory();
-            string fileName = "SieveOfErathosthenesCache.txt";
-            string fullPath= Path.Combine(path, fileName);
-            // Get the boolean array representing prime numbers
-            // up to n
+          
 
-
-            Dictionary<BigInteger, bool> isPrime;
-            if (!File.Exists(fullPath)) { 
-                File.Create(fullPath);
-            }
-            string serializedObj;
-            using (StreamReader file = File.OpenText(fullPath))
-            {
-                file.ReadLine();
-                serializedObj=file.ReadToEnd();
-               
-            }
-            if (string.IsNullOrWhiteSpace(serializedObj))
-            {
-                isPrime = sieveOfEratosthenes(end);
-            }
-            else
-            {
-                isPrime=JsonConvert.DeserializeObject<Dictionary<BigInteger,bool>>(serializedObj);
-            }
-                    
+            Dictionary<BigInteger, bool> isPrime=sieveOfEratosthenes(end);
+        
             //sieveOfEratosthenes(end);
             List<BigInteger> result = new List<BigInteger>();
 
@@ -59,26 +36,6 @@ namespace PrimaryNumbers
                 }
             }
             
-           
-            int cachedCountOfPrimaryNumbers = 0;
-            try
-            {
-                cachedCountOfPrimaryNumbers=int.Parse(File.ReadLines(fullPath).First());
-            }
-            catch (Exception ex)
-            {
-                
-            }
-
-            if(cachedCountOfPrimaryNumbers < isPrime.Count())
-            {
-                using (StreamWriter file = File.CreateText(fullPath)){
-                
-                    string content = JsonConvert.SerializeObject(isPrime);
-                    file.WriteLine(isPrime.Count);
-                    file.WriteLine(content);
-                }
-            }
            
             return result;
         }
