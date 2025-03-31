@@ -1,4 +1,5 @@
-﻿using PrimaryNumbers;
+﻿
+using PrimaryNumbersGenerators;
 using System.Diagnostics;
 using System.Numerics;
 
