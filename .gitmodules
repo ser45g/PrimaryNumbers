@@ -1,0 +1,3 @@
+[submodule "PrimaryNumbersGenerators"]
+	path = PrimaryNumbersGenerators
+	url = https://github.com/ser45g/PrimaryNumbersGenerators.git
